@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import CourseGoalList from "./Components/CourseGoals/CourseGoalList";
+import CourseInput from "./Components/NewGoals/CourseInput";
 
+const dynamicCourseGoals = [
+  { goal: "Do all exercises!", id: "e1" },
+  { goal: "Finish the course!", id: "e2" },
+  {goal: "Improve my React knowledge!", id:"e3"}
+];
 function App() {
+  const [goals, setGoals] = useState(dynamicCourseGoals);
+
+  function handleSetGoal(goal) {
+    setGoals((prevGoal) => {
+      const updatedGoals = [...prevGoal];
+      updatedGoals.unshift({ goal: goal, id: Math.random().toString() });
+      return updatedGoals;
+    });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <section id="goal-form">
+        <CourseInput onSetGoal={handleSetGoal} />
+      </section>
+      <section id="goals">
+        <CourseGoalList lists={goals} />
+      </section>
     </div>
   );
 }

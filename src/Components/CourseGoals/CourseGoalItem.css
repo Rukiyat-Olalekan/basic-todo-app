@@ -1,0 +1,9 @@
+.course-goal-list {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #8b005d;
+    color: white;
+    height: 3rem;
+}
